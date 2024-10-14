@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 11:42:54 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/10/14 11:42:55 by fbazaz           ###   ########.fr       */
+/*   Created: 2024/10/14 11:55:11 by fbazaz            #+#    #+#             */
+/*   Updated: 2024/10/14 15:09:58 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <iostream>
+# include "PhoneBook.hpp"
 
-int main(int ac, char **av)
-{
-    int i;
-    int j;
-    
-    i = 0;
-    if (ac == 1)
-    {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
-        return (1);
-    }
-    while (av[++i])
-    {
-        j = -1;
-        while (av[i][++j])
-            std::cout << (char)std::toupper(av[i][j]);
-    }
-    std::cout << "\n";
+void    PhoneBook::AddContact(Contact& element) {
+    if (GetIndex() == 8)
+        SetIndex(0);
+    contacts[GetIndex()] = element;
+    SetIndex(GetIndex() + 1);
 }
+
+void    PhoneBook::SearchContact() {}
+
