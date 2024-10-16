@@ -14,7 +14,10 @@ class PhoneBook {
         void    SearchContact();
 
         int     GetIndex() const;
-        void    SetIndex(const int i);
+        Contact GetContact(int i) const;
+
+        void    SetContact(int i, Contact& NewUser);
+        void    SetIndex(int i);
 };
 
 #endif

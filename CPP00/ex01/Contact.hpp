@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include <string>
+# include <iomanip>
 
 class Contact {
     private:
@@ -26,5 +27,12 @@ class Contact {
         void        SetPhoneNumber(std::string& Number);
         void        SetDarkestSecret(std::string& Dark);
 };
+
+void    GetInputFirstName(Contact& NewUser);
+void    GetInputLastName(Contact& NewUser);
+void    GetInputNickName(Contact& NewUser);
+void    GetInputPhoneNumber(Contact& NewUser);
+void    GetInputDarkestSecret(Contact& NewUser);
+
 
 #endif

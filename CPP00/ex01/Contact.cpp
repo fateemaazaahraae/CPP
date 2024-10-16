@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:42:47 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/10/14 11:52:07 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/10/15 15:20:01 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ std::string Contact::GetDarkestSecret() const {
 }
 
 //  Setters
-
 void    Contact::SetFirstName(std::string& First)
 {
     FirstName = First;

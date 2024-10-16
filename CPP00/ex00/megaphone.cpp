@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:42:54 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/10/14 11:42:55 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/10/15 16:17:26 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,5 @@ int main(int ac, char **av)
             std::cout << (char)std::toupper(av[i][j]);
     }
     std::cout << "\n";
+    return (0);
 }

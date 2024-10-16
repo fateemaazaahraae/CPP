@@ -5,16 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/15 16:13:43 by fbazaz            #+#    #+#              #
-#    Updated: 2024/10/15 16:13:51 by fbazaz           ###   ########.fr        #
+#    Created: 2024/10/16 16:49:31 by fbazaz            #+#    #+#              #
+#    Updated: 2024/10/16 16:50:40 by fbazaz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = PhoneBook
+NAME = Account
 CC = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = Contact.cpp Contact_utils.cpp main.cpp PhoneBook.cpp
+SRC = Account.cpp tests.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 
