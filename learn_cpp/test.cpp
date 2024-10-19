@@ -16,11 +16,18 @@
 
 //     std::cout << "obj memory " << &student1 << std::endl;
 // }
-# include <iomanip>
+
+
+// # include <iomanip>
+
+// int main()
+// {
+//     std::cout << "hello" << std::setw(1) << "o";
+//     // std::setw(10);
+//     std::cout << "world" << std::endl;
+// }
 
 int main()
 {
-    std::cout << "hello" << std::setw(18);
-    // std::setw(10);
-    std::cout << "world" << std::endl;
+    std::cout << "hello" << std::string(10, 'p') << "lll\n";
 }

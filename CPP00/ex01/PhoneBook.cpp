@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:55:11 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/10/16 15:23:24 by fbazaz           ###   ########.fr       */
+/*   Updated: 2024/10/18 11:10:30 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ std::string ColumnFormat(const std::string& field) {
 }
 
 void    PhoneBook::SearchContact() {
-    int i;
+    int i; 
     int j;
 
     if (contacts[0].GetFirstName().empty())
@@ -78,7 +78,6 @@ void    PhoneBook::SearchContact() {
     {
         std::cout << "Enter the index of the contact to view details: ";
         if (!(std::cin >> j)) {
-            std::cout << "entered\n";
             std::cin.clear(); // Clear error state
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input (clear buffer input)
             std::cerr << "Invalid input. Please enter a number." << std::endl;
