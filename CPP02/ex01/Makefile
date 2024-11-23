@@ -6,11 +6,11 @@
 #    By: tiima <tiima@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 09:37:26 by tiima             #+#    #+#              #
-#    Updated: 2024/11/18 09:37:27 by tiima            ###   ########.fr        #
+#    Updated: 2024/11/19 15:30:56 by tiima            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fixedPoint
+NAME = a.out
 CC = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
