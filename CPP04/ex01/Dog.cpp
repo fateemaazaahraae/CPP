@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:08:16 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/03 14:36:05 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/03 14:35:48 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 Dog::Dog() {
     std::cout << "The Dog Default Constructor called" << std::endl;
     type = "Dog";
+    brain = new Brain();
 }
 
 Dog::~Dog() {
     std::cout << "The Dog Deconstructor called" << std::endl;
+    delete brain;
 }
 
 Dog::Dog(const Dog& other) : Animal(other) {

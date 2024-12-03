@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:19:43 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/03 14:36:00 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/03 14:35:31 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 Cat::Cat() {
     std::cout << "The Cat Default Constructor called" << std::endl;
     type = "Cat";
+    brain = new Brain();
 }
 
 Cat::~Cat() {
     std::cout << "The Cat Deconstructor called" << std::endl;
+    delete brain;
 }
 
 Cat::Cat(const Cat& other) : Animal(other) {

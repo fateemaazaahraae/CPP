@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 10:19:43 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/03 14:36:00 by tiima            ###   ########.fr       */
+/*   Created: 2024/12/03 11:24:13 by tiima             #+#    #+#             */
+/*   Updated: 2024/12/03 11:29:13 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Cat.hpp"
+# include "WrongCat.hpp"
 
-Cat::Cat() {
-    std::cout << "The Cat Default Constructor called" << std::endl;
-    type = "Cat";
+WrongCat::WrongCat() {
+    type = "Cat <WRONG>";
+    std::cout << "The WrongCat Default Constructor called" << std::endl;
 }
 
-Cat::~Cat() {
-    std::cout << "The Cat Deconstructor called" << std::endl;
+WrongCat::~WrongCat() {
+    std::cout << "The WrongCat Deconstructor called" << std::endl;
 }
 
-Cat::Cat(const Cat& other) : Animal(other) {
-    std::cout << "The Cat Copy Constructor called" << std::endl;
+WrongCat::WrongCat(const WrongCat& other) : WrongAnimal(other) {
+    std::cout << "The WrongCat Copy Constructor called" << std::endl;
     *this = other;
 }
 
-Cat&    Cat::operator=(const Cat& other) {
-    std::cout << "The Cat Copy assignment operator called" << std::endl;
+WrongCat&    WrongCat::operator=(const WrongCat& other) {
+    std::cout << "The WrongCat Copy assignment operator called" << std::endl;
     if (this != &other)
         type = other.type;
     return *this;
 }
 
-void    Cat::makeSound() const {
+void    WrongCat::makeSound() const {
     std::cout << "Meow Meow.." << std::endl;
 }
