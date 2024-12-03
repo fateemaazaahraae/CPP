@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:25:48 by tiima             #+#    #+#             */
-/*   Updated: 2024/11/30 15:57:51 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/01 11:24:45 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ DiamondTrap&    DiamondTrap::operator=(const DiamondTrap& other) {
     std::cout << "The DiamondTrap Copy Assignment Operator called >" << std::endl;
     if (this != &other)
     {
+        ClapTrap::Name = other.Name + "_clap_name";
         Name = other.Name;
         HitPoints = other.HitPoints;
         EnergyPoints = other.EnergyPoints;
