@@ -6,13 +6,14 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 09:56:10 by tiima             #+#    #+#             */
-/*   Updated: 2024/10/19 10:17:00 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/05 11:39:48 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Zombie.hpp"
 
-Zombie* zombieHorde( int N, std::string name ) {
+Zombie* zombieHorde( int N, std::string name )
+{
     Zombie* HordeOfZombies;
     int i;
     

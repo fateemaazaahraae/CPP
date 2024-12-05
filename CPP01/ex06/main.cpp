@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:48:10 by tiima             #+#    #+#             */
-/*   Updated: 2024/11/11 14:09:01 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/05 13:22:12 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,4 @@ int main(int ac, char *av[])
             std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
             break;
     }
-    // harl.complain(av[1]);
 }
