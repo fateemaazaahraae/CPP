@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 11:55:11 by fbazaz            #+#    #+#             */
-/*   Updated: 2024/10/18 11:10:30 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/05 09:42:37 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ std::string ColumnFormat(const std::string& field) {
         return (std::string(10 - field.length(), ' ') + field);
 }
 
-void    PhoneBook::SearchContact() {
+void    PhoneBook::SearchContact()
+{
     int i; 
     int j;
 
@@ -72,8 +73,7 @@ void    PhoneBook::SearchContact() {
         }
         i++;
     }
-    
-    //TO ADD A WHILE (1)
+
     while (1)
     {
         std::cout << "Enter the index of the contact to view details: ";
