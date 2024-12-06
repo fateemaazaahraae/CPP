@@ -17,16 +17,12 @@ Zombie* zombieHorde( int N, std::string name );
 int main()
 {
     Zombie* HordeOfZombie;
-    std::string name;
     int i;
     int size;
 
     std::cout << "Enter the number of Zombies you want: ";
     std::cin >> size;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cout << "Enter the name of the Zombies: ";
-    std::getline(std::cin, name);
-    HordeOfZombie = zombieHorde(size, name);
+    HordeOfZombie = zombieHorde(size, "Zoooo");
     i = 0;
     while (i < size)
     {
