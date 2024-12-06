@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:52:08 by tiima             #+#    #+#             */
-/*   Updated: 2024/11/06 14:32:20 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/05 11:54:53 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ int main(int ac, char **av)
     inFile.open(file.c_str());
     if (!inFile.is_open())
     {
-        std::cout << "Error: Could not open file !." << file << std::endl;
+        std::cout << "Error: Could not open input file !." << std::endl;
         return (1);
     }
     outFile.open(fileReplace.c_str());
     if (!outFile.is_open())
     {
         inFile.close();
-        std::cout << "Error: Could not create output file !." << fileReplace << std::endl;
+        std::cout << "Error: Could not create output file !." << std::endl;
         return (1);
     }
     firstLine = true;
@@ -81,7 +81,6 @@ int main(int ac, char **av)
         replaceStrings(outFile, s1, s2, str);
         firstLine = false;
     }
-
     inFile.close();
     outFile.close();
 }

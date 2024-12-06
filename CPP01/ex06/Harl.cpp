@@ -6,7 +6,7 @@
 /*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 11:48:07 by tiima             #+#    #+#             */
-/*   Updated: 2024/11/11 14:08:52 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/05 13:21:39 by tiima            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,39 +57,3 @@ void    Harl::complain(std::string level)
         index++;
     }
 }
-
-// void    Harl::complain( std::string level )
-// {
-//     void        (Harl::*harl[4])(void) = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
-//     std::string levels[] = { "DEBUG", "INFO", "WARNING", "ERROR" };
-//     int         i;
-
-//     i = 0;
-//     while (i < 4 && level != levels[i])
-//         i++;
-
-//     switch (i)
-//     {
-//         case 0:
-//             (this->*harl[0])();
-//             (this->*harl[1])();
-//             (this->*harl[2])();
-//             (this->*harl[3])();
-//             break;
-//         case 1:
-//             (this->*harl[1])();
-//             (this->*harl[2])();
-//             (this->*harl[3])();
-//             break;
-//         case 2:
-//             (this->*harl[2])();
-//             (this->*harl[3])();
-//             break;
-//         case 3:
-//             (this->*harl[3])();
-//             break;
-//         default:
-//             std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-//             break;
-//     }
-// }
