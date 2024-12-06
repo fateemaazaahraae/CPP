@@ -19,7 +19,7 @@ Fixed::Fixed() : fixedPoint(0) {}
 Fixed::~Fixed () {}
 
 Fixed::Fixed (const Fixed& other) {
-    fixedPoint = other.fixedPoint;
+    *this = other;
 }
 
 Fixed&  Fixed::operator=(const Fixed& other) {
