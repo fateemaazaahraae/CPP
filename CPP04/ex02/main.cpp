@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 09:19:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/04 14:50:37 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/31 15:42:54 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Dog.hpp"
 # include "Cat.hpp"
 # include "WrongCat.hpp"
+#include "Animal.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
 int main()
 {
-    int size = 10;
-    Animal* animal[size];
+    // const Animal* meta = new Animal(); // This will now cause a compilation error
+    const Animal* dog = new Dog(); // This works because Dog is an Animal.
+    const Animal* cat = new Cat();
 
-    for (int i = 0; i < size; i++)
-    {
-        if (i % 2 == 0)
-            animal[i] = new Dog();
-        else
-            animal[i] = new Cat();
-    }
+    std::cout << dog->getType() << " says: ";
+    dog->makeSound();
 
-    for (int i = 0; i < size; i++)
-        animal[i]->makeSound();
+    std::cout << cat->getType() << " says: ";
+    cat->makeSound();
 
-    for (int i = 0; i < size; i++)
-        delete animal[i];
+    delete dog;
+    delete cat;
+
 }

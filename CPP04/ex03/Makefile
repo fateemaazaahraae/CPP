@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tiima <tiima@student.42.fr>                +#+  +:+       +#+         #
+#    By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/12/03 11:12:59 by tiima             #+#    #+#              #
-#    Updated: 2024/12/03 11:20:19 by tiima            ###   ########.fr        #
+#    Created: 2024/12/31 17:46:58 by fbazaz            #+#    #+#              #
+#    Updated: 2024/12/31 17:58:18 by fbazaz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = a.out
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRC = Animal.cpp  Cat.cpp  Dog.cpp  main.cpp WrongAnimal.cpp WrongCat.cpp
+SRC = AMateria.cpp Character.cpp Cure.cpp Ice.cpp main.cpp MateriaSource.cpp
 
 OBJ = $(SRC:%.cpp=%.o)
 

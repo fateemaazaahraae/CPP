@@ -13,7 +13,7 @@
 # include "WrongCat.hpp"
 
 WrongCat::WrongCat() {
-    type = "Cat <WRONG>";
+    type = "WrongCat";
     std::cout << "The WrongCat Default Constructor called" << std::endl;
 }
 

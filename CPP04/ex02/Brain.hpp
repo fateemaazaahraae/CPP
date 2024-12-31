@@ -14,7 +14,7 @@ class Brain {
         Brain&  operator=(const Brain& other);
 
         void    setIdea(std::string idea, int index);
-        std::string&    getIdea(int index);
+        std::string    getIdea(int index);
 
 };
 
