@@ -3,26 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:25:48 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/01 11:24:45 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/31 11:13:51 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_name"), ScavTrap(), FragTrap(), Name("Default") {
-    HitPoints = FragTrap::HitPoints;
-    EnergyPoints = ScavTrap::EnergyPoints;
-    AttackDamage = FragTrap::AttackDamage;
+DiamondTrap::DiamondTrap() : ClapTrap("Default_clap_trap", 100, 50, 30), FragTrap(), ScavTrap(), Name("Default") {
     std::cout << "The DiamondTrap Default Constructor called >" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string _name) : ClapTrap(_name + "_clap_name"), ScavTrap(_name), FragTrap(_name), Name(_name) {
-    HitPoints = FragTrap::HitPoints;
-    EnergyPoints = ScavTrap::EnergyPoints;
-    AttackDamage = FragTrap::AttackDamage;
+DiamondTrap::DiamondTrap(std::string _name) : ClapTrap(_name + "_clap_name", 100, 50, 30), FragTrap(), ScavTrap(), Name(_name) {
     std::cout << "The DiamondTrap Parameterized Constructor called >" << std::endl;
 }
 
@@ -30,7 +24,7 @@ DiamondTrap::~DiamondTrap() {
     std::cout << "The DiamondTrap Destructor called >" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), ScavTrap(other), FragTrap(other) {
+DiamondTrap::DiamondTrap(const DiamondTrap& other) : ClapTrap(other), FragTrap(other), ScavTrap(other) {
     std::cout << "The DiamondTrap Copy Constructor called >" << std::endl;
     *this = other;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 08:33:09 by tiima             #+#    #+#             */
-/*   Updated: 2024/11/25 10:25:30 by tiima            ###   ########.fr       */
+/*   Updated: 2025/01/01 08:43:43 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ ClapTrap::ClapTrap( const ClapTrap& other ) : Name(other.Name), HitPoints(other.
     std::cout << "The ClapTrap Copy Constructor called" << std::endl;
 }
 
+ClapTrap::ClapTrap(std::string str, int _hitPoint, int _energy, int _attack) : Name(str), HitPoints(_hitPoint), EnergyPoints(_energy), AttackDamage(_attack) {
+    std::cout << "The ClapTrap Parameterized (2) constructor called" << std::endl;
+}
+
 ClapTrap&   ClapTrap::operator=( const ClapTrap& other ) {
     std::cout << "The ClapTrap Copy assignment operator called" << std::endl;
     if (this != &other)
@@ -47,7 +51,10 @@ void ClapTrap::attack( const std::string& target ) {
         EnergyPoints--;
         return ;
     }
-    std::cout << "ClapTrap " << Name << " cannot attack because he has no EnergyPoints or HitPoints left !" << std::endl;
+    if (EnergyPoints <= 0)
+        std::cout << "ClapTrap " << Name << " cannot attack because he has no EnergyPoints !" << std::endl;
+    else
+        std::cout << "ClapTrap " << Name << " cannot attack because he has no HitPoints !" << std::endl;
 }
 
 void ClapTrap::takeDamage( unsigned int amount ) {
@@ -77,5 +84,8 @@ void ClapTrap::beRepaired( unsigned int amount ) {
         std::cout << "EnergyPoints -> " << EnergyPoints << std::endl;
         return ;
     }
-    std::cout << "ClapTrap " << Name << " cannot attack because he has no EnergyPoints or HitPoints left !" << std::endl;
+    if (EnergyPoints <= 0)
+        std::cout << "ClapTrap " << Name << " cannot be repaired because he has no EnergyPoints !" << std::endl;
+    else
+        std::cout << "ClapTrap " << Name << " cannot be repaired because he has no HitPoint !" << std::endl;
 }

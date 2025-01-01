@@ -3,27 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:26:51 by tiima             #+#    #+#             */
-/*   Updated: 2024/11/25 11:25:33 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/30 09:55:02 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : ClapTrap("Default") {
+ScavTrap::ScavTrap() : ClapTrap("Default", 100, 50, 20) {
     std::cout << "The ScavTrap Default constructor called !!" << std::endl;
-    HitPoints = 100;
-    EnergyPoints = 50;
-    AttackDamage = 20;   
 }
 
-ScavTrap::ScavTrap( std::string str ) : ClapTrap(str) {
-    std::cout << "The ScavTrap Parameterized constructor called !!" << std::endl;
-    HitPoints = 100;
-    EnergyPoints = 50;
-    AttackDamage = 20;   
+ScavTrap::ScavTrap( std::string str ) : ClapTrap(str, 100, 50, 20) {
+    std::cout << "The ScavTrap Parameterized constructor called !!" << std::endl;  
 }
 
 ScavTrap::~ScavTrap() {
@@ -45,6 +39,19 @@ ScavTrap& ScavTrap::operator=( const ScavTrap& other ) {
         AttackDamage = other.AttackDamage;
     }
     return *this;
+}
+
+void ScavTrap::attack(const std::string& target) {
+    if (EnergyPoints > 0 && HitPoints > 0)
+    {
+        std::cout << "ScavTrap " << Name << " attacks " << target << " causing " << AttackDamage << " points of damage" << std::endl;
+        EnergyPoints--;
+        return ;
+    }
+    if (EnergyPoints <= 0)
+        std::cout << "ScavTrap " << Name << " cannot attack because he has no EnergyPoint !" << std::endl;
+    else
+        std::cout << "ScavTrap " << Name << " cannot attack because he has no HitPoints !" << std::endl;
 }
 
 void    ScavTrap::guardGate() {

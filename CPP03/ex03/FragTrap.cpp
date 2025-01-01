@@ -3,27 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tiima <tiima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 10:26:32 by tiima             #+#    #+#             */
-/*   Updated: 2024/11/30 15:58:05 by tiima            ###   ########.fr       */
+/*   Updated: 2024/12/31 10:51:54 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "FragTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap("Default") {
+FragTrap::FragTrap() : ClapTrap("Default", 100, 100, 30) {
     std::cout << "The FragTrap Default Constructor called !." << std::endl;
-    HitPoints = 100;
-    EnergyPoints = 100;
-    AttackDamage = 30;
 }
 
-FragTrap::FragTrap(std::string str) : ClapTrap(str) {
+FragTrap::FragTrap(std::string str) : ClapTrap(str, 100, 100, 30) {
     std::cout << "The FragTrap Parameterized Constructor called !." << std::endl;
-    HitPoints = 100;
-    EnergyPoints = 100;
-    AttackDamage = 30;
 }
 
 FragTrap::~FragTrap() {
