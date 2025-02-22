@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 09:19:49 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/31 15:27:07 by fbazaz           ###   ########.fr       */
+/*   Updated: 2025/01/01 09:25:53 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main()
     Cat cat1(cat);
     std::cout << cat.getBrainIdea(0) << std::endl;
     std::cout << cat1.getBrainIdea(0) << std::endl;
-    cat.setBrainIdea("bb", 0);
+    cat.setBrainIdea("portion", 0);
     std::cout << cat.getBrainIdea(0) << std::endl;
     std::cout << cat1.getBrainIdea(0) << std::endl;
     return 0;

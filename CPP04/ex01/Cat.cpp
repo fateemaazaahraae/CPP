@@ -6,16 +6,16 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 10:19:43 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/31 15:24:55 by fbazaz           ###   ########.fr       */
+/*   Updated: 2025/01/01 09:26:27 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Cat.hpp"
 
 Cat::Cat() {
-    std::cout << "The Cat Default Constructor called" << std::endl;
     type = "Cat";
     brain = new Brain();
+    std::cout << "The Cat Default Constructor called" << std::endl;
 }
 
 Cat::~Cat() {

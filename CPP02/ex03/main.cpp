@@ -14,15 +14,39 @@
 
 int main( void )
 {
-    Point a(0, 0);
-    Point b(4, 0);
-    Point c(0, 3);
+    { // OUTSIDE because the point on the edge
+        Point a(0, 0);
+        Point b(4, 0);
+        Point c(0, 3);
 
-    Point p(2, 0);
-    if (bsp(a, b, c, p) == true)
-        std::cout << "The point INSIDE the triagle\n";
-    else
-        std::cout << "The point OUTSIDE the triagle\n";
+        Point p(2, 0);
+        if (bsp(a, b, c, p) == true)
+            std::cout << "The point INSIDE the triagle\n";
+        else
+            std::cout << "The point OUTSIDE the triagle\n";
+    }
+    { // INSIDE
+        Point a(0, 0);
+        Point b(4, 0);
+        Point c(0, 3);
+
+        Point p(1, 1);
+        if (bsp(a, b, c, p) == true)
+            std::cout << "The point INSIDE the triagle\n";
+        else
+            std::cout << "The point OUTSIDE the triagle\n";
+    }
+    { // OUTSIDE because the point on the vertex
+        Point a(0, 0);
+        Point b(4, 0);
+        Point c(0, 3);
+
+        Point p(0, 0);
+        if (bsp(a, b, c, p) == true)
+            std::cout << "The point INSIDE the triagle\n";
+        else
+            std::cout << "The point OUTSIDE the triagle\n";
+    }
     return 0;
 }
 

@@ -7,7 +7,7 @@
 class   Fixed {
     private:
         int fixedPoint;
-        static  const   int rawBits;
+        static  const   int fractionalBits;
 
     public:
         Fixed(); // default contructor 

@@ -18,10 +18,8 @@ int main()
 {
     Zombie* HordeOfZombie;
     int i;
-    int size;
+    int size = 8;
 
-    std::cout << "Enter the number of Zombies you want: ";
-    std::cin >> size;
     HordeOfZombie = zombieHorde(size, "Zoooo");
     i = 0;
     while (i < size)

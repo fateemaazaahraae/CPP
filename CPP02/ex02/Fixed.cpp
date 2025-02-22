@@ -12,7 +12,7 @@
 
 # include "Fixed.hpp"
 
-const   int Fixed::rawBits = 8;
+const   int Fixed::fractionalBits = 8;
 
 Fixed::Fixed() : fixedPoint(0) {}
 
@@ -28,9 +28,9 @@ Fixed&  Fixed::operator=(const Fixed& other) {
     return *this;
 }
 
-Fixed::Fixed(const int p) : fixedPoint(p * (1 << rawBits)) /* this is equivalent to fixedPoint = p * (pow(2, 8)) */{}
+Fixed::Fixed(const int p) : fixedPoint(p * (1 << fractionalBits)) /* this is equivalent to fixedPoint = p * (pow(2, 8)) */{}
 
-Fixed::Fixed(const float p) : fixedPoint(roundf(p * (1 << rawBits))) {}
+Fixed::Fixed(const float p) : fixedPoint(roundf(p * (1 << fractionalBits))) {}
 
 int Fixed::getRawBits( void ) const {
     return (fixedPoint);
@@ -41,11 +41,11 @@ void    Fixed::setRawBits( int const raw ) {
 }
 
 int     Fixed::toInt( void ) const {
-    return (fixedPoint / (1 << rawBits));
+    return (fixedPoint / (1 << fractionalBits));
 }
 
 float     Fixed::toFloat( void ) const {
-    return (static_cast<float>(fixedPoint) / (1 << rawBits));
+    return ((1.0 * fixedPoint) / (1 << fractionalBits));
 }
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fixed) {
@@ -91,13 +91,13 @@ Fixed   Fixed::operator-(const Fixed& other) const {
 
 Fixed   Fixed::operator*(const Fixed& other) const {
     Fixed returned;
-    returned.setRawBits(((getRawBits() * other.getRawBits())) / (1 << rawBits));
+    returned.setRawBits(((getRawBits() * other.getRawBits())) / (1 << fractionalBits));
     return (returned);
 }
 
 Fixed   Fixed::operator/(const Fixed& other) const {
     Fixed returned;
-    returned.setRawBits((getRawBits() * (1 << rawBits)) / other.getRawBits());
+    returned.setRawBits((getRawBits() * (1 << fractionalBits)) / other.getRawBits());
     return (returned);
 }
 

@@ -6,16 +6,16 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:08:16 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/31 15:25:16 by fbazaz           ###   ########.fr       */
+/*   Updated: 2025/01/01 09:26:22 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "Dog.hpp"
 
 Dog::Dog() {
-    std::cout << "The Dog Default Constructor called" << std::endl;
     type = "Dog";
     brain = new Brain();
+    std::cout << "The Dog Default Constructor called" << std::endl;
 }
 
 Dog::~Dog() {

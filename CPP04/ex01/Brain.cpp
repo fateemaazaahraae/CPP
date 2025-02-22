@@ -6,7 +6,7 @@
 /*   By: fbazaz <fbazaz@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:27:54 by tiima             #+#    #+#             */
-/*   Updated: 2024/12/31 15:19:23 by fbazaz           ###   ########.fr       */
+/*   Updated: 2025/01/01 09:24:29 by fbazaz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ Brain::Brain() {
 }
 
 Brain::~Brain() {
-    // delete[] ideas;
     std::cout << "The Brain destructor called" << std::endl;
 }
 
