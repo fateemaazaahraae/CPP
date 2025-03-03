@@ -44,7 +44,7 @@ class AForm {
 
         void    beSigned(const Bureaucrat& bureaucrat);
 
-        //! pure virtual func
+        //! Pure virtual func
         virtual void    execute(Bureaucrat const & executor) const = 0;
 
 };

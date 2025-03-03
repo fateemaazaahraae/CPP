@@ -18,6 +18,7 @@ class PresidentialPardonForm : public AForm {
         //! Member function
         void    pardonAction() const;
         void    execute(Bureaucrat const& executor) const;
+        static AForm*  createForm(std::string target);
 };
 
 #endif

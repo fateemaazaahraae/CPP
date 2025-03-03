@@ -14,37 +14,24 @@ Intern& Intern::operator=(const Intern& other) {
 
 AForm*  Intern::makeForm(std::string formName, std::string target)
 {
-    std::string forms[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+    AForm* (*Forms[])(std::string) = { 
+        &ShrubberyCreationForm::createForm, 
+        &RobotomyRequestForm::createForm, 
+        &PresidentialPardonForm::createForm 
+    };
+    std::string arr[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 
-    try
-    {
-        int i;
-        for (i = 0; i < 3; i++)
-            if (formName == forms[i])
-                break;
-        switch (i)
+    for (int i = 0; i < 3; i++)
+        if (formName == arr[i])
         {
-            case 0:
-                std::cout << "The Intern create " << formName << std::endl;
-                return new ShrubberyCreationForm(target);
-            case 1:
-                std::cout << "The Intern create " << formName << std::endl;
-                return new RobotomyRequestForm(target);
-            case 2:
-                std::cout << "The Intern create " << formName << std::endl;
-                return new PresidentialPardonForm(target);
-            default:
-                throw ErrMessage();
+            std::cout << "The Intern create " << formName << std::endl;
+            return Forms[i](target);
         }
-    }
-    catch (const std::exception& e)
-    {
-        std::cout << e.what() << formName << std::endl;
-    }
+    throw ErrMessage();
     return NULL;
 }
 
 //! Exceptions
 const char* Intern::ErrMessage::what() const throw() {
-    return "Intern Can't create the ";
+    return "Intern Can't create the Form";
 }

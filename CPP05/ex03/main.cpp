@@ -2,9 +2,20 @@
 
 int main()
 {
-    Intern someRandomIntern;
-    AForm* rrf;
-    rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+    try
+    {
+        Intern someRandomIntern;
+        AForm* rrf;
+        rrf = someRandomIntern.makeForm(" request", "Bender");
 
-    delete rrf;
+        if (rrf)
+        {
+            std::cout << "The form has been created succesfully" << std::endl;
+            delete rrf;
+        }
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+    }
 }

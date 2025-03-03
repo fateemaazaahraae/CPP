@@ -24,6 +24,7 @@ class ShrubberyCreationForm : public AForm {
         //! Member function
         void    shrubberyAction() const;
         void	execute(Bureaucrat const& executor) const;
+        static AForm*  createForm(std::string target);
 };
 
 #endif
