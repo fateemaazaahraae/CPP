@@ -2,8 +2,7 @@
 # define SERIALIZER_HPP
 
 # include <iostream>
-
-typedef unsigned long uintptr_t;
+# include <stdint.h>
 
 typedef struct s_data
 {

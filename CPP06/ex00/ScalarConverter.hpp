@@ -11,9 +11,6 @@ class ScalarConverter
     private:
         ScalarConverter();
     public :
-        // ~ScalarConverter();
-        // ScalarConverter(const ScalarConverter& other);
-        // ScalarConverter&    operator=(const ScalarConverter& other);
 
         static void convert(std::string input);
         static void impossibleCast();
