@@ -53,6 +53,16 @@ const char* BitcoinExchange::badInputException::what() const throw()
     return "Error: bad input";
 }
 
+const char* BitcoinExchange::noEarlierDateException::what() const throw()
+{
+    return "Error: No earlier date";
+}
+
+const char* BitcoinExchange::dateValueException::what() const throw()
+{
+    return "Error: Invalid date(year, month or day) value";
+}
+
 //! Member Functions
 void    BitcoinExchange::StoreData()
 {
@@ -103,12 +113,18 @@ bool    BitcoinExchange::checkMinus(std::string line)
     return true;
 }
 
-bool    BitcoinExchange::isValidDate(std::string line)
+bool BitcoinExchange::isValidDate(std::string date)
 {
-    if (checkMinus(line) == false)
+    if (!checkMinus(date))
         return false;
+    int y, m, d;
+    if (sscanf(date.c_str(), "%d-%d-%d", &y, &m, &d) != 3)
+        return false;
+    if (m < 1 || m > 12 || d < 1 || d > 31 || y > 2025)
+        throw dateValueException();
     return true;
 }
+
 
 void    BitcoinExchange::parseFirstDate(std::string first)
 {
@@ -168,6 +184,12 @@ void    BitcoinExchange::displayInfo(std::string& line)
         throw badInputException();
     parseSecondDate(p1.second);
     it = dataBase.lower_bound(p1.first);
+    if (it == dataBase.end() || it->first != p1.first)
+    {
+        if (it == dataBase.begin())
+            throw noEarlierDateException();
+        --it;
+    }
     float value = std::atof(p1.second.c_str());
     float rate = std::atof(it->second.c_str());
     float multipl = rate * value;

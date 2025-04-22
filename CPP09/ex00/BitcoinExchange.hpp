@@ -68,6 +68,18 @@ class BitcoinExchange
             public :
                 const char* what() const throw();
         };
+        //? for earlier date
+        class noEarlierDateException : public std::exception
+        {
+            public :
+                const char* what() const throw();
+        };
+        //? for invalid date value ex: 2300-55-90
+        class dateValueException : public std::exception
+        {
+            public :
+                const char* what() const throw();
+        };
 
         //! Member Functions
         void    StoreData();
