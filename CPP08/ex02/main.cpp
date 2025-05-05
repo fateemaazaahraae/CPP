@@ -23,19 +23,21 @@ int main()
         ++it;
     }
     
-    //! STRING version
-    MutantStack<std::string> mstack2;
-    mstack2.push("hello");
-    mstack2.push("world");
-    mstack2.push("coding");
-    MutantStack<std::string>::iterator it1 = mstack2.begin();
-    MutantStack<std::string>::iterator ite1 = mstack2.end();
-    ++it1;
-    --it1;
-    while (it1 != ite1)
-    {
-        std::cout << *it1 << std::endl;
-        ++it1;
+    std::cout << "### List test ###" << std::endl;
+    std::list<int> mlist;
+
+    mlist.push_back(5);
+    mlist.push_back(17);
+    std::cout << "Top: " << mlist.back() << std::endl;
+    mlist.pop_back();
+    std::cout << "Size: " << mlist.size() << std::endl;
+    mlist.push_back(3);
+    mlist.push_back(5);
+    mlist.push_back(737);
+    mlist.push_back(0);
+
+    for (std::list<int>::iterator it = mlist.begin(); it != mlist.end(); ++it) {
+        std::cout << *it << std::endl;
     }
 
     return 0;

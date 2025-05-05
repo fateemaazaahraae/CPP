@@ -4,6 +4,7 @@
 # include <iostream>
 # include <vector>
 # include <algorithm>
+# include <list>
 
 class IndexException : public std::exception
 {
@@ -17,11 +18,10 @@ class IndexException : public std::exception
 template <typename T>
 int    easyfind(T& arr, int n)
 {
-    // I should search for the purpose of adding the "template" keyword before the variable
     typename T::iterator it;
     it = std::find(arr.begin(), arr.end(), n);
     if (it != arr.end())
-        return (it - arr.begin());
+        return std::distance(arr.begin(), it);
     throw IndexException();
 }
 

@@ -35,7 +35,7 @@ int main()
         moreNumbers.push_back(11);
 
         sp.fillSpan(moreNumbers.begin(), moreNumbers.end());
-        std::cout << "Added more numbers successfully (this should not print).\n";
+        std::cout << "Added more numbers successfully.\n";
     }
     catch (const std::exception &e)
     {
