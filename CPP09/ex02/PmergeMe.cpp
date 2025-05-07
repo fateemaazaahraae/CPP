@@ -42,7 +42,10 @@ std::vector<std::pair<int, int> >   PmergeMe::pairAndSortElementVec(std::vector<
     std::vector<std::pair<int, int> > pairs;
 
     if (vec.size() % 2 != 0)
+    {
         vecStruggle = vec.back();
+        vec.pop_back();
+    }
 
     //? Make Pairs
     for (size_t i = 0; i + 1 < vec.size(); i += 2)
@@ -58,6 +61,31 @@ std::vector<std::pair<int, int> >   PmergeMe::pairAndSortElementVec(std::vector<
     return pairs;
 }
 
+std::vector<int>    PmergeMe::extractFirstEleVec(std::vector<std::pair<int, int> > pairs)
+{
+    std::vector<int> sortedVec;
+
+    //? Extract first
+    for (size_t i = 0; i < pairs.size(); i++)
+        sortedVec.push_back(pairs[i].first);
+
+    //? Insert second
+    for (size_t i = 0; i < pairs.size(); i++)
+    {
+        int value = pairs[i].second;
+        std::vector<int>::iterator pos = std::lower_bound(sortedVec.begin(), sortedVec.end(), value);
+        sortedVec.insert(pos, value);
+    }
+
+    //? Insert the struggle if exist
+    if (vecStruggle != -1)
+    {
+        std::vector<int>::iterator pos = std::lower_bound(sortedVec.begin(), sortedVec.end(), vecStruggle);
+        sortedVec.insert(pos, vecStruggle);
+    }
+    return sortedVec;
+}
+
 //! END VECTOR
 
 
@@ -66,6 +94,55 @@ void    PmergeMe::fillDeque(std::vector<int> vec)
 {
     for (size_t i = 0; i < vec.size(); i++)
         myDeque.push_back(vec[i]);
+}
+
+std::deque<std::pair<int, int> >   PmergeMe::pairAndSortElementDeq(std::deque<int> deq)
+{
+    std::deque<std::pair<int, int> > pairs;
+
+    if (deq.size() % 2 != 0) 
+    {
+        deqStruggle = deq.back();
+        deq.pop_back();
+    }
+
+    //? Make Pairs
+    for (size_t i = 0; i + 1 < deq.size(); i += 2)
+        pairs.push_back(std::make_pair(deq[i], deq[i + 1]));
+
+    //? Sort Pairs
+    for (size_t i = 0; i < pairs.size(); i++)
+        if (pairs[i].first < pairs[i].second)
+            std::swap(pairs[i].first, pairs[i].second);
+
+    //? Sort The Pairs Itself
+    std::sort(pairs.begin(), pairs.end(), comparePairs);
+    return pairs;
+}
+
+std::deque<int>     PmergeMe::extractFirstEleDeq(std::deque<std::pair<int, int> > pairs)
+{
+    std::deque<int> sortedDeq;
+
+    //? Extract first
+    for (size_t i = 0; i < pairs.size(); i++)
+        sortedDeq.push_back(pairs[i].first);
+
+    //? Insert second
+    for (size_t i = 0; i < pairs.size(); i++)
+    {
+        int value = pairs[i].second;
+        std::deque<int>::iterator pos = std::lower_bound(sortedDeq.begin(), sortedDeq.end(), value);
+        sortedDeq.insert(pos, value);
+    }
+
+    //? Insert the struggle if exist
+    if (deqStruggle != -1)
+    {
+        std::deque<int>::iterator pos = std::lower_bound(sortedDeq.begin(), sortedDeq.end(), deqStruggle);
+        sortedDeq.insert(pos, deqStruggle);
+    }
+    return sortedDeq;
 }
 
 //! END DEQUE
@@ -81,20 +158,51 @@ void    PmergeMe::displayFirstLine()
     }
 }
 
+void    PmergeMe::displaySecondLine(std::vector<int>& sortedVec)
+{
+    std::cout << "\nAfter:  ";
+    for (size_t i = 0; i < sortedVec.size(); i++)
+    {
+        std::cout << sortedVec[i];
+        if (i != sortedVec.size() - 1)
+            std::cout << " ";
+    }
+    std::cout << std::endl;
+}
 
+void    PmergeMe::displayThirdLine(clock_t time)
+{
+    std::cout << "Time to process a range of " << myVector.size()
+            << " elements with std::vector : " << (float)time * 100 / CLOCKS_PER_SEC << " us" << std::endl;
+}
+
+void    PmergeMe::displayLastLine(clock_t time)
+{
+    std::cout << "Time to process a range of " << myDeque.size()
+            << " elements with std::deque : " << (float)time * 100 / CLOCKS_PER_SEC << " us" << std::endl;
+}
 
 void    PmergeMe::mergeInsertionSort()
 {
-    std::vector<std::pair<int, int> > pairs;
+    std::vector<std::pair<int, int> > vecPairs;
+    std::vector<int>    sortedVec;
+    std::deque<std::pair<int, int> > deqPairs;
+    std::deque<int>    sortedDeq;
     displayFirstLine();
 
     //! VECTOR part
-    pairs = pairAndSortElementVec(myVector);
-    // displaySecondLine();
+    clock_t vecStart = clock();
+    vecPairs = pairAndSortElementVec(myVector);
+    sortedVec = extractFirstEleVec(vecPairs);
+
+    displaySecondLine(sortedVec);
+    displayThirdLine(clock() - vecStart);
 
     //! DEQUE part
-    // displayThirdLine();
-    // displayLastLine();
+    clock_t deqStart = clock();
+    deqPairs = pairAndSortElementDeq(myDeque);
+    sortedDeq = extractFirstEleDeq(deqPairs);
+    displayLastLine(clock() - deqStart);
 }
 
 
