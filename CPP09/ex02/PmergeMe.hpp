@@ -7,6 +7,7 @@
 # include <climits>
 # include <deque>
 # include <ctime>
+# include <sys/time.h>
 
 typedef std::pair<int, int> Pair;
 
@@ -27,8 +28,8 @@ class PmergeMe
         void    mergeInsertionSort();
         void    displayFirstLine();
         void    displaySecondLine(std::vector<int>& sortedVec);
-        void    displayThirdLine(clock_t time);
-        void    displayLastLine(clock_t time);
+        void    displayThirdLine(unsigned long time);
+        void    displayLastLine(unsigned long time);
         
         //! VECTOR FUNCTIONS
         void    fillVector(std::vector<int> vec);

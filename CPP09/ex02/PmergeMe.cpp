@@ -50,7 +50,6 @@ std::vector<Pair> PmergeMe::pairAndSortElementVec(std::vector<int> vec)
     }
 
     std::sort(pairs.begin(), pairs.end(), comparePairs);
-
     return pairs;
 }
 
@@ -71,10 +70,56 @@ std::vector<int> PmergeMe::extractSecondElements(const std::vector<Pair>& pairs)
     return result;
 }
 
+std::vector<size_t> PmergeMe::getJacobInsertionOrderVec(size_t n)
+{
+    std::vector<size_t> order;
+    if (n == 0)
+        return order;
+
+    std::vector<size_t> jacob;
+    jacob.push_back(1);
+    size_t j1 = 1, j2 = 0;
+
+    while (1)
+    {
+        size_t next = j1 + 2 * j2;
+        if (next >= n)
+            break;
+        jacob.push_back(next);
+        j2 = j1;
+        j1 = next;
+    }
+
+    std::vector<bool> inserted(n, false);
+    for (size_t i = 0; i < jacob.size(); ++i) 
+    {
+        size_t j = jacob[i];
+        if (j < n && !inserted[j])
+        {
+            order.push_back(j);
+            inserted[j] = true;
+        }
+        size_t start = (i == 0) ? 0 : jacob[i - 1] + 1;
+        for (ssize_t k = j - 1; k >= static_cast<ssize_t>(start); --k)
+        {
+            if (!inserted[k])
+            {
+                order.push_back(k);
+                inserted[k] = true;
+            }
+        }
+    }
+    for (size_t i = 0; i < n; ++i)
+        if (!inserted[i])
+            order.push_back(i);
+    return order;
+}
+
 void PmergeMe::insertWithJacobOrderVec(std::vector<int>& S, const std::vector<int>& B)
 {
     std::vector<size_t> order = getJacobInsertionOrderVec(B.size());
-    for (size_t i = 0; i < order.size(); ++i) {
+    for (size_t i = 0; i < order.size(); ++i)
+    {
         int value = B[order[i]];
         std::vector<int>::iterator pos = std::lower_bound(S.begin(), S.end(), value);
         S.insert(pos, value);
@@ -153,10 +198,57 @@ std::deque<int> PmergeMe::extractSecondElementsDeq(const std::deque<Pair>& pairs
     return result;
 }
 
+std::deque<size_t> PmergeMe::getJacobInsertionOrderDeq(size_t n)
+{
+    std::deque<size_t> order;
+    if (n == 0)
+        return order;
+
+    std::deque<size_t> jacob;
+    jacob.push_back(1);
+    size_t j1 = 1, j2 = 0;
+
+    while (1)
+    {
+        size_t next = j1 + 2 * j2;
+        if (next >= n)
+            break;
+        jacob.push_back(next);
+        j2 = j1;
+        j1 = next;
+    }
+
+    std::vector<bool> inserted(n, false);
+    for (size_t i = 0; i < jacob.size(); ++i)
+    {
+        size_t j = jacob[i];
+        if (j < n && !inserted[j])
+        {
+            order.push_back(j);
+            inserted[j] = true;
+        }
+
+        size_t start = (i == 0) ? 0 : jacob[i - 1] + 1;
+        for (ssize_t k = j - 1; k >= static_cast<ssize_t>(start); --k)
+        {
+            if (!inserted[k])
+            {
+                order.push_back(k);
+                inserted[k] = true;
+            }
+        }
+    }
+    for (size_t i = 0; i < n; ++i)
+        if (!inserted[i])
+            order.push_back(i);
+    return order;
+}
+
 void PmergeMe::insertWithJacobOrderDeq(std::deque<int>& S, const std::deque<int>& B)
 {
     std::deque<size_t> order = getJacobInsertionOrderDeq(B.size());
-    for (size_t i = 0; i < order.size(); ++i) {
+    for (size_t i = 0; i < order.size(); ++i)
+    {
         int value = B[order[i]];
         std::deque<int>::iterator pos = std::lower_bound(S.begin(), S.end(), value);
         S.insert(pos, value);
@@ -185,7 +277,6 @@ void    PmergeMe::mergeInsertionSortDeq(std::deque<int>& deq)
 
     if (hasStraggler)
         insertStragglerDeq(S, straggler);
-
     deq = S;
 }
 
@@ -214,37 +305,49 @@ void    PmergeMe::displaySecondLine(std::vector<int>& sortedVec)
     std::cout << std::endl;
 }
 
-void    PmergeMe::displayThirdLine(clock_t time)
+void    PmergeMe::displayThirdLine(unsigned long time)
 {
     std::cout << "Time to process a range of " << myVector.size()
-            << " elements with std::vector : " << (float)time * 100 / CLOCKS_PER_SEC << " us" << std::endl;
+            << " elements with std::vector : " << time << " us" << std::endl;
 }
 
-void    PmergeMe::displayLastLine(clock_t time)
+void    PmergeMe::displayLastLine(unsigned long time)
 {
     std::cout << "Time to process a range of " << myDeque.size()
-            << " elements with std::deque : " << (float)time * 100 / CLOCKS_PER_SEC << " us" << std::endl;
+            << " elements with std::deque : " << time << " us" << std::endl;
 }
 
 void    PmergeMe::mergeInsertionSort()
 {
+	struct timeval 						tv;
+    unsigned long   startVec;
+    unsigned long   endVec;
+    unsigned long   startDeq;
+    unsigned long   endDeq;
+
     displayFirstLine();
 
     //! VECTOR part
-    // clock_t vecStart = clock();
+    gettimeofday(&tv, NULL);
+    startVec = 1000000 * tv.tv_sec + tv.tv_usec;
+
     mergeInsertionSortVec(myVector);
 
+    gettimeofday(&tv, NULL);
+    endVec = 1000000 * tv.tv_sec + tv.tv_usec;
+
     displaySecondLine(myVector);
-    // displayThirdLine(clock() - vecStart);
+    displayThirdLine(endVec - startVec);
 
     //! DEQUE part
-    // clock_t deqStart = clock();
+    gettimeofday(&tv, NULL);
+    startDeq = 1000000 * tv.tv_sec + tv.tv_usec;
+
     mergeInsertionSortDeq(myDeque);
-    std::cout << "DEQUE:  ";
-    for (size_t i = 0; i < myDeque.size(); i++)
-        std::cout << myDeque[i]<< " ";
-    std::cout << std::endl;
-    // displayLastLine(clock() - deqStart);
+
+    gettimeofday(&tv, NULL);
+    endDeq = 1000000 * tv.tv_sec + tv.tv_usec;
+    displayLastLine(endDeq - startDeq);
 }
 
 
@@ -291,89 +394,4 @@ std::vector<int>   parseInput(std::vector<std::string>& vec)
     return convertStringVec(vec);
 }
 
-std::vector<size_t> PmergeMe::getJacobInsertionOrderVec(size_t n)
-{
-    std::vector<size_t> order;
-    if (n == 0) return order;
 
-    std::vector<size_t> jacob;
-    jacob.push_back(1);
-    size_t j1 = 1, j2 = 0;
-
-    while (true) {
-        size_t next = j1 + 2 * j2;
-        if (next >= n) break;
-        jacob.push_back(next);
-        j2 = j1;
-        j1 = next;
-    }
-
-    std::vector<bool> inserted(n, false);
-
-    for (size_t i = 0; i < jacob.size(); ++i) {
-        size_t j = jacob[i];
-        if (j < n && !inserted[j]) {
-            order.push_back(j);
-            inserted[j] = true;
-        }
-
-        size_t start = (i == 0) ? 0 : jacob[i - 1] + 1;
-        for (ssize_t k = j - 1; k >= static_cast<ssize_t>(start); --k) {
-            if (!inserted[k]) {
-                order.push_back(k);
-                inserted[k] = true;
-            }
-        }
-    }
-
-    for (size_t i = 0; i < n; ++i)
-        if (!inserted[i])
-            order.push_back(i);
-
-    return order;
-}
-
-std::deque<size_t> PmergeMe::getJacobInsertionOrderDeq(size_t n)
-{
-    std::deque<size_t> order;
-    if (n == 0) return order;
-
-    std::deque<size_t> jacob;
-    jacob.push_back(1);
-    size_t j1 = 1, j2 = 0;
-
-    // Generate the Jacob's sequence
-    while (true) {
-        size_t next = j1 + 2 * j2;
-        if (next >= n) break;
-        jacob.push_back(next);
-        j2 = j1;
-        j1 = next;
-    }
-
-    std::vector<bool> inserted(n, false);
-
-    // Insert elements into the order deque following the Jacob's insertion order
-    for (size_t i = 0; i < jacob.size(); ++i) {
-        size_t j = jacob[i];
-        if (j < n && !inserted[j]) {
-            order.push_back(j);
-            inserted[j] = true;
-        }
-
-        size_t start = (i == 0) ? 0 : jacob[i - 1] + 1;
-        for (ssize_t k = j - 1; k >= static_cast<ssize_t>(start); --k) {
-            if (!inserted[k]) {
-                order.push_back(k);
-                inserted[k] = true;
-            }
-        }
-    }
-
-    // Insert any remaining elements
-    for (size_t i = 0; i < n; ++i)
-        if (!inserted[i])
-            order.push_back(i);
-
-    return order;
-}
