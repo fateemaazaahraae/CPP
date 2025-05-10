@@ -17,8 +17,6 @@ PmergeMe&   PmergeMe::operator=(const PmergeMe& other)
 
 PmergeMe::PmergeMe(std::vector<int> vec)
 {
-    vecStruggle = -1;
-    deqStruggle = -1;
     fillVector(vec);
     fillDeque(vec);
 }
@@ -32,58 +30,81 @@ void    PmergeMe::fillVector(std::vector<int> vec)
         myVector.push_back(vec[i]);
 }
 
-bool comparePairs(const std::pair<int, int>& a, const std::pair<int, int>& b)
+bool comparePairs(const Pair& a, const Pair& b)
 {
     return a.first < b.first;
 }
 
-std::vector<std::pair<int, int> >   PmergeMe::pairAndSortElementVec(std::vector<int> vec)
+std::vector<Pair> PmergeMe::pairAndSortElementVec(std::vector<int> vec)
 {
-    std::vector<std::pair<int, int> > pairs;
+    std::vector<Pair> pairs;
 
-    if (vec.size() % 2 != 0)
+    for (size_t i = 0; i + 1 < vec.size(); i += 2)
     {
-        vecStruggle = vec.back();
-        vec.pop_back();
+        int a = vec[i];
+        int b = vec[i + 1];
+        if (a < b)
+            pairs.push_back(std::make_pair(a, b));
+        else
+            pairs.push_back(std::make_pair(b, a));
     }
 
-    //? Make Pairs
-    for (size_t i = 0; i + 1 < vec.size(); i += 2)
-        pairs.push_back(std::make_pair(vec[i], vec[i + 1]));
-
-    //? Sort Pairs
-    for (size_t i = 0; i < pairs.size(); i++)
-        if (pairs[i].first < pairs[i].second)
-            std::swap(pairs[i].first, pairs[i].second);
-
-    //? Sort The Pairs Itself
     std::sort(pairs.begin(), pairs.end(), comparePairs);
+
     return pairs;
 }
 
-std::vector<int>    PmergeMe::extractFirstEleVec(std::vector<std::pair<int, int> > pairs)
+
+std::vector<int> PmergeMe::extractFirstElements(const std::vector<Pair>& pairs)
 {
-    std::vector<int> sortedVec;
+    std::vector<int> result;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        result.push_back(pairs[i].first);
+    return result;
+}
 
-    //? Extract first
-    for (size_t i = 0; i < pairs.size(); i++)
-        sortedVec.push_back(pairs[i].first);
+std::vector<int> PmergeMe::extractSecondElements(const std::vector<Pair>& pairs)
+{
+    std::vector<int> result;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        result.push_back(pairs[i].second);
+    return result;
+}
 
-    //? Insert second
-    for (size_t i = 0; i < pairs.size(); i++)
-    {
-        int value = pairs[i].second;
-        std::vector<int>::iterator pos = std::lower_bound(sortedVec.begin(), sortedVec.end(), value);
-        sortedVec.insert(pos, value);
+void PmergeMe::insertWithJacobOrderVec(std::vector<int>& S, const std::vector<int>& B)
+{
+    std::vector<size_t> order = getJacobInsertionOrderVec(B.size());
+    for (size_t i = 0; i < order.size(); ++i) {
+        int value = B[order[i]];
+        std::vector<int>::iterator pos = std::lower_bound(S.begin(), S.end(), value);
+        S.insert(pos, value);
     }
+}
 
-    //? Insert the struggle if exist
-    if (vecStruggle != -1)
-    {
-        std::vector<int>::iterator pos = std::lower_bound(sortedVec.begin(), sortedVec.end(), vecStruggle);
-        sortedVec.insert(pos, vecStruggle);
-    }
-    return sortedVec;
+void PmergeMe::insertStragglerVec(std::vector<int>& S, int straggler)
+{
+    std::vector<int>::iterator pos = std::lower_bound(S.begin(), S.end(), straggler);
+    S.insert(pos, straggler);
+}
+
+void    PmergeMe::mergeInsertionSortVec(std::vector<int>& vec)
+{
+    if (vec.size() < 1)
+        return;
+
+    std::vector<Pair> vecPairs = pairAndSortElementVec(vec);
+    std::vector<int> S = extractFirstElements(vecPairs);
+    std::vector<int> B = extractSecondElements(vecPairs);
+
+    bool hasStraggler = vec.size() % 2 != 0;
+    int straggler = hasStraggler ? vec.back() : -1;
+
+    insertWithJacobOrderVec(S, B);
+
+    if (hasStraggler)
+        insertStragglerVec(S, straggler);
+
+    vec = S;
 }
 
 //! END VECTOR
@@ -96,53 +117,76 @@ void    PmergeMe::fillDeque(std::vector<int> vec)
         myDeque.push_back(vec[i]);
 }
 
-std::deque<std::pair<int, int> >   PmergeMe::pairAndSortElementDeq(std::deque<int> deq)
+std::deque<Pair> PmergeMe::pairAndSortElementDeq(std::deque<int> vec)
 {
-    std::deque<std::pair<int, int> > pairs;
+    std::deque<Pair> pairs;
 
-    if (deq.size() % 2 != 0) 
+    for (size_t i = 0; i + 1 < vec.size(); i += 2)
     {
-        deqStruggle = deq.back();
-        deq.pop_back();
+        int a = vec[i];
+        int b = vec[i + 1];
+        if (a < b)
+            pairs.push_back(std::make_pair(a, b));
+        else
+            pairs.push_back(std::make_pair(b, a));
     }
 
-    //? Make Pairs
-    for (size_t i = 0; i + 1 < deq.size(); i += 2)
-        pairs.push_back(std::make_pair(deq[i], deq[i + 1]));
-
-    //? Sort Pairs
-    for (size_t i = 0; i < pairs.size(); i++)
-        if (pairs[i].first < pairs[i].second)
-            std::swap(pairs[i].first, pairs[i].second);
-
-    //? Sort The Pairs Itself
     std::sort(pairs.begin(), pairs.end(), comparePairs);
+
     return pairs;
 }
 
-std::deque<int>     PmergeMe::extractFirstEleDeq(std::deque<std::pair<int, int> > pairs)
+
+std::deque<int> PmergeMe::extractFirstElementsDeq(const std::deque<Pair>& pairs)
 {
-    std::deque<int> sortedDeq;
+    std::deque<int> result;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        result.push_back(pairs[i].first);
+    return result;
+}
 
-    //? Extract first
-    for (size_t i = 0; i < pairs.size(); i++)
-        sortedDeq.push_back(pairs[i].first);
+std::deque<int> PmergeMe::extractSecondElementsDeq(const std::deque<Pair>& pairs)
+{
+    std::deque<int> result;
+    for (size_t i = 0; i < pairs.size(); ++i)
+        result.push_back(pairs[i].second);
+    return result;
+}
 
-    //? Insert second
-    for (size_t i = 0; i < pairs.size(); i++)
-    {
-        int value = pairs[i].second;
-        std::deque<int>::iterator pos = std::lower_bound(sortedDeq.begin(), sortedDeq.end(), value);
-        sortedDeq.insert(pos, value);
+void PmergeMe::insertWithJacobOrderDeq(std::deque<int>& S, const std::deque<int>& B)
+{
+    std::deque<size_t> order = getJacobInsertionOrderDeq(B.size());
+    for (size_t i = 0; i < order.size(); ++i) {
+        int value = B[order[i]];
+        std::deque<int>::iterator pos = std::lower_bound(S.begin(), S.end(), value);
+        S.insert(pos, value);
     }
+}
 
-    //? Insert the struggle if exist
-    if (deqStruggle != -1)
-    {
-        std::deque<int>::iterator pos = std::lower_bound(sortedDeq.begin(), sortedDeq.end(), deqStruggle);
-        sortedDeq.insert(pos, deqStruggle);
-    }
-    return sortedDeq;
+void PmergeMe::insertStragglerDeq(std::deque<int>& S, int straggler)
+{
+    std::deque<int>::iterator pos = std::lower_bound(S.begin(), S.end(), straggler);
+    S.insert(pos, straggler);
+}
+
+void    PmergeMe::mergeInsertionSortDeq(std::deque<int>& deq)
+{
+    if (deq.size() < 1)
+        return;
+
+    std::deque<Pair> deqPairs = pairAndSortElementDeq(deq);
+    std::deque<int> S = extractFirstElementsDeq(deqPairs);
+    std::deque<int> B = extractSecondElementsDeq(deqPairs);
+
+    bool hasStraggler = deq.size() % 2 != 0;
+    int straggler = hasStraggler ? deq.back() : -1;
+
+    insertWithJacobOrderDeq(S, B);
+
+    if (hasStraggler)
+        insertStragglerDeq(S, straggler);
+
+    deq = S;
 }
 
 //! END DEQUE
@@ -184,25 +228,23 @@ void    PmergeMe::displayLastLine(clock_t time)
 
 void    PmergeMe::mergeInsertionSort()
 {
-    std::vector<std::pair<int, int> > vecPairs;
-    std::vector<int>    sortedVec;
-    std::deque<std::pair<int, int> > deqPairs;
-    std::deque<int>    sortedDeq;
     displayFirstLine();
 
     //! VECTOR part
-    clock_t vecStart = clock();
-    vecPairs = pairAndSortElementVec(myVector);
-    sortedVec = extractFirstEleVec(vecPairs);
+    // clock_t vecStart = clock();
+    mergeInsertionSortVec(myVector);
 
-    displaySecondLine(sortedVec);
-    displayThirdLine(clock() - vecStart);
+    displaySecondLine(myVector);
+    // displayThirdLine(clock() - vecStart);
 
     //! DEQUE part
-    clock_t deqStart = clock();
-    deqPairs = pairAndSortElementDeq(myDeque);
-    sortedDeq = extractFirstEleDeq(deqPairs);
-    displayLastLine(clock() - deqStart);
+    // clock_t deqStart = clock();
+    mergeInsertionSortDeq(myDeque);
+    std::cout << "DEQUE:  ";
+    for (size_t i = 0; i < myDeque.size(); i++)
+        std::cout << myDeque[i]<< " ";
+    std::cout << std::endl;
+    // displayLastLine(clock() - deqStart);
 }
 
 
@@ -247,4 +289,91 @@ std::vector<int>   parseInput(std::vector<std::string>& vec)
     for (size_t i = 0; i < vec.size(); i++)
         checkDigit(vec[i]);
     return convertStringVec(vec);
+}
+
+std::vector<size_t> PmergeMe::getJacobInsertionOrderVec(size_t n)
+{
+    std::vector<size_t> order;
+    if (n == 0) return order;
+
+    std::vector<size_t> jacob;
+    jacob.push_back(1);
+    size_t j1 = 1, j2 = 0;
+
+    while (true) {
+        size_t next = j1 + 2 * j2;
+        if (next >= n) break;
+        jacob.push_back(next);
+        j2 = j1;
+        j1 = next;
+    }
+
+    std::vector<bool> inserted(n, false);
+
+    for (size_t i = 0; i < jacob.size(); ++i) {
+        size_t j = jacob[i];
+        if (j < n && !inserted[j]) {
+            order.push_back(j);
+            inserted[j] = true;
+        }
+
+        size_t start = (i == 0) ? 0 : jacob[i - 1] + 1;
+        for (ssize_t k = j - 1; k >= static_cast<ssize_t>(start); --k) {
+            if (!inserted[k]) {
+                order.push_back(k);
+                inserted[k] = true;
+            }
+        }
+    }
+
+    for (size_t i = 0; i < n; ++i)
+        if (!inserted[i])
+            order.push_back(i);
+
+    return order;
+}
+
+std::deque<size_t> PmergeMe::getJacobInsertionOrderDeq(size_t n)
+{
+    std::deque<size_t> order;
+    if (n == 0) return order;
+
+    std::deque<size_t> jacob;
+    jacob.push_back(1);
+    size_t j1 = 1, j2 = 0;
+
+    // Generate the Jacob's sequence
+    while (true) {
+        size_t next = j1 + 2 * j2;
+        if (next >= n) break;
+        jacob.push_back(next);
+        j2 = j1;
+        j1 = next;
+    }
+
+    std::vector<bool> inserted(n, false);
+
+    // Insert elements into the order deque following the Jacob's insertion order
+    for (size_t i = 0; i < jacob.size(); ++i) {
+        size_t j = jacob[i];
+        if (j < n && !inserted[j]) {
+            order.push_back(j);
+            inserted[j] = true;
+        }
+
+        size_t start = (i == 0) ? 0 : jacob[i - 1] + 1;
+        for (ssize_t k = j - 1; k >= static_cast<ssize_t>(start); --k) {
+            if (!inserted[k]) {
+                order.push_back(k);
+                inserted[k] = true;
+            }
+        }
+    }
+
+    // Insert any remaining elements
+    for (size_t i = 0; i < n; ++i)
+        if (!inserted[i])
+            order.push_back(i);
+
+    return order;
 }
