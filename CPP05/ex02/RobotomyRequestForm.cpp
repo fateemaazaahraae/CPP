@@ -20,11 +20,17 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 
 //! Member functions
 void    RobotomyRequestForm::robotAction() const {
-    srand(time(NULL));
+    // srand(time(NULL))
     if (rand() % 2 == 0)
+    {
+        std::cout << "--> " << rand() << std::endl;
         std::cout << this->_target << " has been robotomized successfully." << std::endl;
+    }
     else
+    {
+        std::cout << "--> " << rand() << std::endl;
         std::cout << "The robotomy failed !!" << std::endl;
+    }
 }
 
 void    RobotomyRequestForm::execute(Bureaucrat const& executor) const {

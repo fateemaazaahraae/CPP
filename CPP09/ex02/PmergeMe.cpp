@@ -32,7 +32,7 @@ void    PmergeMe::fillVector(std::vector<int> vec)
 
 bool comparePairs(const Pair& a, const Pair& b)
 {
-    return a.first < b.first;
+    return a.second < b.second;
 }
 
 std::vector<Pair> PmergeMe::pairAndSortElementVec(std::vector<int> vec)
@@ -138,8 +138,8 @@ void    PmergeMe::mergeInsertionSortVec(std::vector<int>& vec)
         return;
 
     std::vector<Pair> vecPairs = pairAndSortElementVec(vec);
-    std::vector<int> S = extractFirstElements(vecPairs);
-    std::vector<int> B = extractSecondElements(vecPairs);
+    std::vector<int> B = extractFirstElements(vecPairs);
+    std::vector<int> S = extractSecondElements(vecPairs);
 
     bool hasStraggler = vec.size() % 2 != 0;
     int straggler = hasStraggler ? vec.back() : -1;
@@ -232,7 +232,7 @@ std::deque<size_t> PmergeMe::getJacobInsertionOrderDeq(size_t n)
         for (ssize_t k = j - 1; k >= static_cast<ssize_t>(start); --k)
         {
             if (!inserted[k])
-            {
+            {   
                 order.push_back(k);
                 inserted[k] = true;
             }
@@ -267,8 +267,8 @@ void    PmergeMe::mergeInsertionSortDeq(std::deque<int>& deq)
         return;
 
     std::deque<Pair> deqPairs = pairAndSortElementDeq(deq);
-    std::deque<int> S = extractFirstElementsDeq(deqPairs);
-    std::deque<int> B = extractSecondElementsDeq(deqPairs);
+    std::deque<int> B = extractFirstElementsDeq(deqPairs);
+    std::deque<int> S = extractSecondElementsDeq(deqPairs);
 
     bool hasStraggler = deq.size() % 2 != 0;
     int straggler = hasStraggler ? deq.back() : -1;

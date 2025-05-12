@@ -32,8 +32,13 @@ int main()
         RobotomyRequestForm robot("ROBOT");
         std::cout << c << std::endl;
         std::cout << robot << std::endl;
+    srand(time(NULL));
         c.executeForm(robot);
         robot.beSigned(c);
+        c.executeForm(robot);
+        c.executeForm(robot);
+        c.executeForm(robot);
+        c.executeForm(robot);
         c.executeForm(robot);
     }
     catch (const std::exception& e)
