@@ -118,28 +118,28 @@ bool    ScalarConverter::isDouble(std::string input)
     int len = input.length();
     bool    digit = false;
     bool    dot = false;
-
+    
     if (input == "-inf" || input == "+inf" || input == "nan")
-        return true;
+    return true;
     if (len < 2)
-        return false;
+    return false;
     if (input[0] == '-' || input[0] == '+')
-        i++;
+    i++;
     while (i < len)
     {
         if (isdigit(input[i]))
-            digit = true;
+        digit = true;
         else if (input[i] == '.')
         {
             if (dot)
-                return false;
+            return false;
             dot = true;
         }
         else
-            return false;
+        return false;
         i++;
     }
-    if (input[0] == '.' || input[1] == '.' || input[len - 1] == '.')
+    if (input[0] == '.' || input[len - 1] == '.')
         return false;
     return digit;
 }

@@ -7,6 +7,5 @@ int main(int ac, char *av[])
         std::cout << "Enter One Argument." << std::endl;
         return 1;
     }
-    (void)av;
     ScalarConverter::convert(av[1]);
 }
